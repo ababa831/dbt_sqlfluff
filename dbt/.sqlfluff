@@ -1,0 +1,32 @@
+[sqlfluff]
+templater = dbt
+
+[sqlfluff:rules]
+tab_space_size = 4
+max_line_length = 80
+indent_unit = space
+comma_style = leading
+
+[sqlfluff:rules:L010]
+capitalisation_policy = lower
+
+[sqlfluff:rules:L011]
+# Aliasing preference for tables
+aliasing = explicit
+
+[sqlfluff:rules:L012]
+# Aliasing preference for columns
+aliasing = explicit
+
+[sqlfluff:rules:L014]
+capitalisation_policy = lower
+unquoted_identifiers_policy = column_aliases
+
+[sqlfluff:rules:L016]
+ignore_comment_lines = True
+
+[sqlfluff:templater:dbt]
+project_dir = .
+profiles_dir = ~/.dbt/
+profile = test-project
+target = dev
