@@ -5,7 +5,7 @@ templater = dbt
 tab_space_size = 4
 max_line_length = 80
 indent_unit = space
-comma_style = leading
+comma_style = trailing
 
 [sqlfluff:rules:L010]
 capitalisation_policy = lower
