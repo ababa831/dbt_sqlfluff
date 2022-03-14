@@ -7,17 +7,17 @@
     Try changing "table" to "view" below
 */
 
-{{ config(materialized='table') }}
+{{config(materialized='table')}}
 
 with source_data as (
 
-    select 1 as id
+    select 1 as id, 10 as age
     union all
-    select null as id
+    select null as id, 15 as age
 
 )
 
-select *
+SELECT id customer_id, age customer_age
 from source_data
 
 /*
