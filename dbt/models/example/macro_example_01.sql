@@ -15,12 +15,6 @@ SELECT DATE_SUB(DATE("{{ time_checkpoint_val }}"), INTERVAL 3 DAY)
 {%- set since_result = load_result('since') -%}
 {%- set since = since_result['data'][0][0] -%}
 
-{% call set_sql_header(config) %}
-CREATE TEMPORARY FUNCTION ua_to_version(ua STRING) 
-RETURNS STRING LANGUAGE js OPTIONS (library = "gs://bigquery_assets/udf/woothee.js")
-AS """return woothee.parse(ua).os_version;""";
-{%- endcall %}
-
 {{ 
 config(materialized='ephemeral')
 }}
