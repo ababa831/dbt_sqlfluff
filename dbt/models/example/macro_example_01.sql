@@ -1,5 +1,3 @@
--- dataformの pre_operations をdbt用のプラクティスに基づいて書き替えたもの
--- TODO: UDFとしてmacrosに切り出して、認識できるようにする。（切り出した際の挙動が不自然なので保留中）
 {%- if is_incremental() -%}
 {%- call statement('time_checkpoint', fetch_result=True)  -%}
 select max(time) from {{ this }}
@@ -17,8 +15,6 @@ SELECT DATE_SUB(DATE("{{ time_checkpoint_val }}"), INTERVAL 3 DAY)
 {%- set since_result = load_result('since') -%}
 {%- set since = since_result['data'][0][0] -%}
 
-
--- TEMPORARY UDF (TODO: macrosディレクトリから認識できるようにしたい)
 {% call set_sql_header(config) %}
 CREATE TEMPORARY FUNCTION ua_to_version(ua STRING) 
 RETURNS STRING LANGUAGE js OPTIONS (library = "gs://bigquery_assets/udf/woothee.js")
